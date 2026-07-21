@@ -1,0 +1,34 @@
+name: Feature Request
+description: Suggest a new feature or enhancement
+title: "[FEATURE]: "
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: description
+    attributes:
+      label: Feature Description
+      description: A clear and concise description of the feature.
+    validations:
+      required: true
+  - type: textarea
+    id: rationale
+    attributes:
+      label: Rationale
+      description: Why is this feature needed?
+    validations:
+      required: true
+  - type: dropdown
+    id: service
+    attributes:
+      label: Affected Service
+      options:
+        - api-gateway
+        - authentication-service
+        - customer-service
+        - account-service
+        - transaction-service
+        - payment-service
+        - notification-service
+        - fraud-detection-service
+        - infrastructure
+        - all-services
