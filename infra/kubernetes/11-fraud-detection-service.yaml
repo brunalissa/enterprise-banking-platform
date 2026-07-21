@@ -1,0 +1,71 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: fraud-detection-service
+  namespace: banking-platform
+  labels:
+    app: fraud-detection-service
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: fraud-detection-service
+  template:
+    metadata:
+      labels:
+        app: fraud-detection-service
+    spec:
+      containers:
+        - name: fraud-detection-service
+          image: enterprise-banking-platform/fraud-detection-service:latest
+          ports:
+            - containerPort: 8087
+          env:
+            - name: SPRING_PROFILES_ACTIVE
+              value: docker
+            - name: SPRING_DATASOURCE_URL
+              value: "jdbc:postgresql://$(POSTGRES_HOST):$(POSTGRES_PORT)/banking_fraud"
+            - name: SPRING_KAFKA_BOOTSTRAP_SERVERS
+              valueFrom:
+                configMapKeyRef:
+                  name: banking-config
+                  key: KAFKA_BOOTSTRAP_SERVERS
+            - name: JWT_SECRET
+              valueFrom:
+                secretKeyRef:
+                  name: banking-secrets
+                  key: JWT_SECRET
+          envFrom:
+            - secretRef:
+                name: banking-secrets
+          resources:
+            requests:
+              memory: "256Mi"
+              cpu: "250m"
+            limits:
+              memory: "512Mi"
+              cpu: "500m"
+          readinessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8087
+            initialDelaySeconds: 30
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /actuator/health
+              port: 8087
+            initialDelaySeconds: 60
+            periodSeconds: 10
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fraud-detection-service
+  namespace: banking-platform
+spec:
+  selector:
+    app: fraud-detection-service
+  ports:
+    - port: 8087
+      targetPort: 8087

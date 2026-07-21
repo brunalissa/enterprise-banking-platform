@@ -1,0 +1,7 @@
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: banking-platform
+  labels:
+    app.kubernetes.io/name: enterprise-banking-platform
+    app.kubernetes.io/managed-by: kubectl
