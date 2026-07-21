@@ -1,0 +1,16 @@
+spring:
+  datasource:
+    url: jdbc:h2:mem:auth_test;MODE=PostgreSQL;DB_CLOSE_DELAY=-1
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+  jpa:
+    hibernate:
+      ddl-auto: create-drop
+  flyway:
+    enabled: false
+
+app:
+  jwt:
+    secret: test-secret-key-must-be-at-least-32-characters-long
+    expiration-ms: 60000

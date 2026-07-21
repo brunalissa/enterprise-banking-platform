@@ -1,0 +1,27 @@
+server:
+  port: 8080
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: auth-service
+          uri: http://authentication-service:8081
+          predicates: [Path=/api/v1/auth/**]
+        - id: customer-service
+          uri: http://customer-service:8082
+          predicates: [Path=/api/v1/customers/**]
+        - id: account-service
+          uri: http://account-service:8083
+          predicates: [Path=/api/v1/accounts/**]
+        - id: transaction-service
+          uri: http://transaction-service:8084
+          predicates: [Path=/api/v1/transactions/**]
+        - id: payment-service
+          uri: http://payment-service:8085
+          predicates: [Path=/api/v1/payments/**]
+        - id: notification-service
+          uri: http://notification-service:8086
+          predicates: [Path=/api/v1/notifications/**]
+        - id: fraud-detection-service
+          uri: http://fraud-detection-service:8087
+          predicates: [Path=/api/v1/fraud/**]

@@ -1,0 +1,46 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: authentication-service
+  datasource:
+    url: jdbc:postgresql://localhost:5432/banking_auth
+    username: postgres
+    password: postgres
+    driver-class-name: org.postgresql.Driver
+  jpa:
+    hibernate:
+      ddl-auto: validate
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQLDialect
+        default_schema: auth
+    show-sql: false
+  flyway:
+    enabled: true
+    schemas: auth
+    locations: classpath:db/migration
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
+jwt:
+  secret: banking-platform-secret-key-must-be-at-least-256-bits-long-for-hs256
+  expiration: 86400000
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,info,metrics,prometheus
+  endpoint:
+    health:
+      show-details: when-authorized
+
+springdoc:
+  api-docs:
+    path: /v3/api-docs
+  swagger-ui:
+    path: /swagger-ui.html
