@@ -1,9 +1,11 @@
 # 🏦 Enterprise Banking Platform
 
-> A production-grade, cloud-native enterprise banking backend platform built with Java 17, Spring Boot 3, microservices architecture, and event-driven design.
+> A production-grade, cloud-native enterprise banking platform built with Java 17, Spring Boot 3, React 19, TypeScript, microservices architecture, and event-driven design.
 
 ![Java](https://img.shields.io/badge/Java-17-orange?style=for-the-badge&logo=openjdk)
 ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.2.5-green?style=for-the-badge&logo=springboot)
+![React](https://img.shields.io/badge/React-19-61DAFB?style=for-the-badge&logo=react)
+![TypeScript](https://img.shields.io/badge/TypeScript-5.4-3178C6?style=for-the-badge&logo=typescript)
 ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-16-blue?style=for-the-badge&logo=postgresql)
 ![Kafka](https://img.shields.io/badge/Apache%20Kafka-3.5-red?style=for-the-badge&logo=apachekafka)
 ![Docker](https://img.shields.io/badge/Docker-Ready-blue?style=for-the-badge&logo=docker)
@@ -24,6 +26,7 @@
 - [Security Architecture](#security-architecture)
 - [Design Patterns](#design-patterns)
 - [Running Locally](#running-locally)
+- [Frontend](#frontend)
 - [Running with Docker](#running-with-docker)
 - [Running with Kubernetes](#running-with-kubernetes)
 - [Running Tests](#running-tests)
@@ -826,6 +829,101 @@ The architecture is designed for distributed tracing:
 - API Gateway injects `X-Request-Id` and `X-Trace-Id` headers
 - Each service propagates trace headers
 - Ready for OpenTelemetry / Jaeger integration
+
+---
+
+## Frontend Application
+
+The project includes a modern **React 19 + TypeScript** frontend for the Enterprise Banking Platform.
+
+### Frontend Architecture
+
+```
+frontend/
+├── src/
+│   ├── app/              # App shell, routing, providers
+│   ├── components/       # Reusable UI components
+│   │   ├── common/       # KpiCard, PageHeader, SkeletonCard, ErrorBoundary
+│   │   ├── charts/       # TimeseriesChart, DoughnutChart (Recharts)
+│   │   └── layout/       # Sidebar, Topbar, AppLayout
+│   ├── features/         # Feature-based modules
+│   │   ├── authentication/ # AuthContext, LoginPage, ProtectedRoute
+│   │   ├── customers/      # CustomerListPage, CustomerCreateDialog
+│   │   ├── accounts/       # AccountListPage
+│   │   ├── transactions/   # TransactionListPage
+│   │   ├── payments/       # PaymentListPage
+│   │   ├── notifications/  # NotificationPage
+│   │   └── monitoring/     # DashboardPage, MonitoringPage, ObservabilityPage
+│   ├── hooks/            # Custom React hooks (useToast)
+│   ├── services/         # API clients (Axios interceptors, all API files)
+│   ├── theme/            # MUI theme + ThemeContext (dark/light mode)
+│   ├── types/            # TypeScript interfaces and enums
+│   └── utils/            # Formatting utilities
+```
+
+### Frontend Technology Stack
+
+| Layer | Technology |
+|-------|------------|
+| Framework | React 19 + TypeScript |
+| Build Tool | Vite |
+| UI Library | Material UI v6 |
+| Server State | TanStack Query |
+| Client State | Context API |
+| Routing | React Router v7 |
+| Charts | Recharts |
+| HTTP Client | Axios |
+| Testing | Vitest + React Testing Library |
+| Linting | ESLint + TypeScript ESLint |
+| Formatting | Prettier |
+
+### Pages
+
+| Page | Path | Access |
+|------|------|--------|
+| Login | `/login` | Public |
+| Dashboard | `/dashboard` | All roles |
+| Customers | `/customers` | Admin, Employee |
+| Accounts | `/accounts` | All roles |
+| Transactions | `/transactions` | All roles |
+| Payments | `/payments` | All roles |
+| Notifications | `/notifications` | All roles |
+| Monitoring | `/monitoring` | Admin, Employee |
+| Observability | `/observability` | Admin, Employee |
+
+### Authentication
+
+- **JWT-based**: Tokens stored in `localStorage`, injected via Axios interceptors
+- **Role-based navigation**: Sidebar shows only permitted pages
+- **Protected routes**: Unauthenticated users redirected to login
+- **Mock mode**: Demo accounts available for offline development
+
+### Running the Frontend
+
+```bash
+cd frontend
+npm install
+npm run dev
+```
+
+The app will be available at **http://localhost:3000**
+
+### Building for Production
+
+```bash
+cd frontend
+npm run build
+```
+
+Static files will be generated in `frontend/dist/`. Deploy to any static host (S3, Vercel, Nginx, etc.).
+
+### Environment Variables
+
+| Variable | Default | Description |
+|----------|---------|-------------|
+| `VITE_API_GATEWAY_URL` | `http://localhost:8080` | Backend API Gateway URL |
+| `VITE_API_VERSION` | `v1` | API version prefix |
+| `VITE_USE_MOCKS` | `true` | Use mock data instead of real API |
 
 ---
 

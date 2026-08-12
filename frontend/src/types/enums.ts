@@ -1,0 +1,73 @@
+export enum CustomerStatus {
+  PENDING_VERIFICATION = 'PENDING_VERIFICATION',
+  ACTIVE = 'ACTIVE',
+  SUSPENDED = 'SUSPENDED',
+  BLACKLISTED = 'BLACKLISTED',
+  CLOSED = 'CLOSED',
+}
+
+export enum AccountType {
+  CHECKING = 'CHECKING',
+  SAVINGS = 'SAVINGS',
+  BUSINESS = 'BUSINESS',
+  JOINT = 'JOINT',
+}
+
+export enum AccountStatus {
+  ACTIVE = 'ACTIVE',
+  FROZEN = 'FROZEN',
+  CLOSED = 'CLOSED',
+  PENDING_ACTIVATION = 'PENDING_ACTIVATION',
+}
+
+export enum TransactionType {
+  TRANSFER = 'TRANSFER',
+  DEPOSIT = 'DEPOSIT',
+  WITHDRAWAL = 'WITHDRAWAL',
+  PAYMENT = 'PAYMENT',
+}
+
+export enum TransactionStatus {
+  PENDING = 'PENDING',
+  PROCESSING = 'PROCESSING',
+  COMPLETED = 'COMPLETED',
+  FAILED = 'FAILED',
+  COMPENSATED = 'COMPENSATED',
+}
+
+export enum PaymentType {
+  BILL_PAYMENT = 'BILL_PAYMENT',
+  P2P_TRANSFER = 'P2P_TRANSFER',
+  MERCHANT_PAYMENT = 'MERCHANT_PAYMENT',
+  INTERNAL_TRANSFER = 'INTERNAL_TRANSFER',
+}
+
+export enum PaymentStatus {
+  INITIATED = 'INITIATED',
+  PROCESSING = 'PROCESSING',
+  CONFIRMED = 'CONFIRMED',
+  FAILED = 'FAILED',
+  REFUNDED = 'REFUNDED',
+}
+
+export enum NotificationType {
+  EMAIL = 'EMAIL',
+  SMS = 'SMS',
+  PUSH = 'PUSH',
+  ACCOUNT_ALERT = 'ACCOUNT_ALERT',
+  TRANSACTION_ALERT = 'TRANSACTION_ALERT',
+  FRAUD_ALERT = 'FRAUD_ALERT',
+}
+
+export enum ServiceStatus {
+  HEALTHY = 'HEALTHY',
+  DEGRADED = 'DEGRADED',
+  DOWN = 'DOWN',
+}
+
+export enum RiskLevel {
+  LOW = 'LOW',
+  MEDIUM = 'MEDIUM',
+  HIGH = 'HIGH',
+  CRITICAL = 'CRITICAL',
+}
