@@ -8,6 +8,8 @@ resource "aws_eks_cluster" "main" {
   role_arn = aws_iam_role.eks_cluster.arn
   version  = "1.28"
 
+  depends_on = [aws_iam_role_policy_attachment.eks_cluster_policy]
+
   vpc_config {
     subnet_ids = var.subnet_ids
   }
@@ -79,3 +81,8 @@ resource "aws_iam_role_policy_attachment" "eks_nodes_policy" {
 
 output "cluster_name" { value = aws_eks_cluster.main.name }
 output "cluster_endpoint" { value = aws_eks_cluster.main.endpoint }
+
+resource "aws_iam_role_policy_attachment" "eks_cluster_policy" {
+  role       = aws_iam_role.eks_cluster.name
+  policy_arn = "arn:aws:iam::aws:policy/AmazonEKSClusterPolicy"
+}

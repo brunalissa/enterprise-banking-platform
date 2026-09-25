@@ -22,14 +22,15 @@ resource "aws_elasticache_subnet_group" "main" {
 }
 
 resource "aws_elasticache_replication_group" "main" {
-  replication_group_id = "${var.project_name}-redis"
-  replication_group_description = "Redis for ${var.project_name}"
-  node_type            = "cache.t3.micro"
-  number_cache_clusters = 2
-  subnet_group_name    = aws_elasticache_subnet_group.main.name
-  security_group_ids   = [aws_security_group.redis.id]
-  engine_version       = "7.0"
-  multi_az_enabled     = true
+  replication_group_id       = "${var.project_name}-redis"
+  description                = "Redis for ${var.project_name}"
+  node_type                  = "cache.t3.micro"
+  num_cache_clusters         = 2
+  automatic_failover_enabled = true
+  subnet_group_name          = aws_elasticache_subnet_group.main.name
+  security_group_ids         = [aws_security_group.redis.id]
+  engine_version             = "7.0"
+  multi_az_enabled           = true
 
   tags = {
     Name        = "${var.project_name}-redis"

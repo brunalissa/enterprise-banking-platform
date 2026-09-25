@@ -1,3 +1,4 @@
+import { parsePrometheusMetrics } from './prometheus';
 const USE_MOCKS = import.meta.env.VITE_USE_MOCKS === 'true';
 
 import type { ServiceHealth, PrometheusMetrics, DashboardMetrics, FraudAlert, TimeseriesPoint } from '@/types/monitoring';
@@ -7,7 +8,9 @@ const realApi = {
   getServices: () =>
     fetch('http://localhost:8080/actuator/health').then((r) => r.json()).catch(() => mockData.services),
   getMetrics: () =>
-    fetch('http://localhost:8080/actuator/prometheus').then((r) => r.text()).catch(() => mockData.metrics),
+    fetch(`${import.meta.env.VITE_API_GATEWAY_URL || 'http://localhost:8080'}/actuator/prometheus`)
+      .then((r) => { if (!r.ok) throw new Error(`Metrics request failed: ${r.status}`); return r.text(); })
+      .then(parsePrometheusMetrics),
 };
 
 // ═══ Mock data generators ═══

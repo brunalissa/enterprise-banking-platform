@@ -31,17 +31,17 @@ resource "aws_db_subnet_group" "main" {
 }
 
 resource "aws_db_instance" "main" {
-  identifier           = "${var.project_name}-postgres"
-  allocated_storage    = var.allocated_storage
-  engine               = "postgres"
-  engine_version       = "16"
-  instance_class       = var.db_instance_class
-  username             = "postgres"
-  password             = "changeMeToSomethingSecure123!"
-  db_subnet_group_name = aws_db_subnet_group.main.name
+  identifier             = "${var.project_name}-postgres"
+  allocated_storage      = var.allocated_storage
+  engine                 = "postgres"
+  engine_version         = "16"
+  instance_class         = var.db_instance_class
+  username               = "postgres"
+  password               = "changeMeToSomethingSecure123!"
+  db_subnet_group_name   = aws_db_subnet_group.main.name
   vpc_security_group_ids = [aws_security_group.rds.id]
-  skip_final_snapshot   = true
-  multi_az              = true
+  skip_final_snapshot    = true
+  multi_az               = true
 
   tags = {
     Name        = "${var.project_name}-rds"

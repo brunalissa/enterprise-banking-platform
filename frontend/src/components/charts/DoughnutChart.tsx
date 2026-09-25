@@ -27,7 +27,7 @@ export function DoughnutChart({ data, height = 250 }: Props) {
           ))}
         </Pie>
         <Tooltip
-          contentStyle={{ bgcolor: theme.palette.background.paper, border: `1px solid ${theme.palette.divider}`, borderRadius: 8, fontSize: 12 }}
+          contentStyle={{ backgroundColor: theme.palette.background.paper, border: `1px solid ${theme.palette.divider}`, borderRadius: 8, fontSize: 12 }}
         />
         <Legend wrapperStyle={{ fontSize: 12 }} />
       </PieChart>

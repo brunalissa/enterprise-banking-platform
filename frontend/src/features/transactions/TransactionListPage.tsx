@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Typography, Chip, Button, Grid } from '@mui/material';
+import { type ChipProps, Box, Card, CardContent, Typography, Chip, Button, Grid } from '@mui/material';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
 import { useState } from 'react';
 import { TransactionStatus, TransactionType } from '@/types/enums';
@@ -18,11 +18,11 @@ const mockTransactions = Array.from({ length: 30 }, (_, i) => ({
   createdAt: new Date(Date.now() - i * 3600000).toISOString(),
 }));
 
-const statusColors: Record<string, 'success' | 'warning' | 'error' | 'info'> = {
+const statusColors: Record<string, NonNullable<ChipProps['color']>> = {
   COMPLETED: 'success', PENDING: 'warning', PROCESSING: 'info', FAILED: 'error', COMPENSATED: 'default',
 };
 
-const typeColors: Record<string, 'primary' | 'secondary' | 'info'> = {
+const typeColors: Record<string, NonNullable<ChipProps['color']>> = {
   TRANSFER: 'primary', DEPOSIT: 'success', WITHDRAWAL: 'warning', PAYMENT: 'info',
 };
 
@@ -54,7 +54,7 @@ export function TransactionListPage() {
       <PageHeader title="Transaction Management" subtitle="View and track money transfers, deposits, and withdrawals" breadcrumbs={['Dashboard', 'Transactions']} />
       <Grid container spacing={3} sx={{ mb: 3 }}>
         {['Total Volume', 'Completed', 'Pending', 'Failed'].map((label, i) => (
-          <Grid item xs={6} sm={3} key={label}>
+          <Grid size={{ xs: 6, sm: 3 }} key={label}>
             <Card>
               <CardContent sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" sx={{ fontWeight: 700 }}>{[formatCurrency(2.4e6), '24,801', '1,234', '89'][i]}</Typography>

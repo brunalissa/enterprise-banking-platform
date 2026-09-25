@@ -24,7 +24,7 @@ export function MonitoringPage() {
         {services?.map((svc) => {
           const cfg = statusConfig[svc.status] || statusConfig.HEALTHY;
           return (
-            <Grid item xs={12} sm={6} lg={3} key={svc.name}>
+            <Grid size={{ xs: 12, sm: 6, lg: 3 }} key={svc.name}>
               <Card sx={{ height: '100%' }}>
                 <CardContent>
                   <Box sx={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', mb: 1.5 }}>

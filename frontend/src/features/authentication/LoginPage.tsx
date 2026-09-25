@@ -49,14 +49,14 @@ export function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             margin="normal" required
             placeholder="admin@bank.com"
-            InputProps={{ startAdornment: <InputAdornment position="start"><Email /></InputAdornment> }}
+            slotProps={{ input: { startAdornment: <InputAdornment position="start"><Email /></InputAdornment> } }}
           />
           <TextField
             fullWidth label="Password" type={showPwd ? 'text' : 'password'} value={password}
             onChange={(e) => setPassword(e.target.value)}
             margin="normal" required
             placeholder="••••••••"
-            InputProps={{
+            slotProps={{ input: {
               startAdornment: <InputAdornment position="start"><Lock /></InputAdornment>,
               endAdornment: (
                 <InputAdornment position="end">
@@ -65,7 +65,7 @@ export function LoginPage() {
                   </IconButton>
                 </InputAdornment>
               ),
-            }}
+            } }}
           />
           <Button type="submit" fullWidth variant="contained" size="large" disabled={loading}
             sx={{ mt: 3, py: 1.5, fontSize: 16, fontWeight: 600, borderRadius: 2 }}>

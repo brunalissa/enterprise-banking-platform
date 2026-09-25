@@ -14,7 +14,7 @@ const mockPayments = Array.from({ length: 25 }, (_, i) => ({
   amount: 25 + Math.random() * 5000,
   currency: 'USD',
   type: [PaymentType.BILL_PAYMENT, PaymentType.P2P_TRANSFER, PaymentType.MERCHANT_PAYMENT][i%3],
-  status: [PaymentStatus.CONFIRMED, PaymentStatus.PENDING, PaymentStatus.FAILED, PaymentStatus.REFUNDED][i%4],
+  status: [PaymentStatus.CONFIRMED, PaymentStatus.INITIATED, PaymentStatus.FAILED, PaymentStatus.REFUNDED][i%4],
   reference: `PAY-${Date.now()}-${i}`,
   createdAt: new Date(Date.now() - i * 7200000).toISOString(),
 }));
@@ -51,7 +51,7 @@ export function PaymentListPage() {
       <PageHeader title="Payment Management" subtitle="View payment history, statuses, and processing details" breadcrumbs={['Dashboard', 'Payments']} />
       <Grid container spacing={3} sx={{ mb: 3 }}>
         {['Total Processed', 'Successful', 'Pending', 'Failed'].map((label, i) => (
-          <Grid item xs={6} sm={3} key={label}>
+          <Grid size={{ xs: 6, sm: 3 }} key={label}>
             <Card>
               <CardContent sx={{ textAlign: 'center' }}>
                 <Typography variant="h5" sx={{ fontWeight: 700 }}>{[formatCurrency(1.2e6), '45,678', '2,341', '89'][i]}</Typography>
