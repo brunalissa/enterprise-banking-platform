@@ -17,15 +17,15 @@ export function ObservabilityPage() {
     <Box>
       <PageHeader title="Observability Dashboard" subtitle="Prometheus-style metrics, resource usage, and system health" breadcrumbs={['Dashboard', 'Observability']} />
       <Grid container spacing={3} sx={{ mb: 3 }}>
-        {[
+        {([
           { label: 'CPU Usage', value: formatPercentage(m.cpuUsage), raw: m.cpuUsage, color: m.cpuUsage > 80 ? 'error' : m.cpuUsage > 60 ? 'warning' : 'success' },
           { label: 'Memory Usage', value: formatPercentage(m.memoryUsage), raw: m.memoryUsage, color: m.memoryUsage > 80 ? 'error' : m.memoryUsage > 60 ? 'warning' : 'success' },
           { label: 'Request Rate', value: m.requestRate.toFixed(1) + '/s', raw: Math.min(m.requestRate / 10, 100), color: 'primary' },
           { label: 'Error Rate', value: m.errorRate.toFixed(2) + '%', raw: Math.min(m.errorRate * 100, 100), color: m.errorRate > 1 ? 'error' : 'success' },
           { label: 'Response Time', value: m.avgResponseTime.toFixed(1) + 'ms', raw: Math.min(m.avgResponseTime / 50, 100), color: m.avgResponseTime > 100 ? 'warning' : 'success' },
           { label: 'DB Connections', value: String(m.dbConnections), raw: Math.min(m.dbConnections * 5, 100), color: 'info' },
-        ].map((item) => (
-          <Grid item xs={12} sm={6} lg={2} key={item.label}>
+        ] as const).map((item) => (
+          <Grid size={{ xs: 12, sm: 6, lg: 2 }} key={item.label}>
             <Card sx={{ height: '100%' }}>
               <CardContent>
                 <Typography variant="body2" color="text.secondary" sx={{ mb: 1 }}>{item.label}</Typography>
@@ -37,7 +37,7 @@ export function ObservabilityPage() {
         ))}
       </Grid>
       <Grid container spacing={3}>
-        <Grid item xs={12} lg={6}>
+        <Grid size={{ xs: 12, lg: 6 }}>
           <Card>
             <CardContent>
               <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>CPU Usage (Last 24 Hours)</Typography>
@@ -45,7 +45,7 @@ export function ObservabilityPage() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12} lg={6}>
+        <Grid size={{ xs: 12, lg: 6 }}>
           <Card>
             <CardContent>
               <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>Memory Usage (Last 24 Hours)</Typography>
@@ -53,7 +53,7 @@ export function ObservabilityPage() {
             </CardContent>
           </Card>
         </Grid>
-        <Grid item xs={12}>
+        <Grid size={{ xs: 12 }}>
           <Card>
             <CardContent>
               <Typography variant="h6" sx={{ mb: 2, fontWeight: 600 }}>Error Rate (Last 24 Hours)</Typography>

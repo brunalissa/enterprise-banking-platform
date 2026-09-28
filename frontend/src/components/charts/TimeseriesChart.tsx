@@ -28,8 +28,8 @@ export function TimeseriesChart({ data, color, label = 'Value', height = 200 }: 
         <YAxis tick={{ fontSize: 11, fill: theme.palette.text.secondary }} />
         <Tooltip
           labelFormatter={(l) => fmtTime(l as string)}
-          formatter={(v: number) => [v.toFixed(2), label]}
-          contentStyle={{ bgcolor: theme.palette.background.paper, border: `1px solid ${theme.palette.divider}`, borderRadius: 8, fontSize: 12 }}
+          formatter={(v) => [typeof v === 'number' ? v.toFixed(2) : String(v ?? ''), label]}
+          contentStyle={{ backgroundColor: theme.palette.background.paper, border: `1px solid ${theme.palette.divider}`, borderRadius: 8, fontSize: 12 }}
         />
         <Area type="monotone" dataKey="value" stroke={chartColor} fill="url(#chartGradient)" strokeWidth={2} />
       </AreaChart>

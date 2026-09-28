@@ -5,3 +5,7 @@ target/
 *.md
 docs/
 infra/
+
+**/target/
+frontend/node_modules/
+frontend/dist/

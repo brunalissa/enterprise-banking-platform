@@ -1,4 +1,4 @@
-import { Box, Card, CardContent, Typography, Chip, CircularProgress, Alert, Button } from '@mui/material';
+import { type ChipProps, Box, Card, CardContent, Typography, Chip, CircularProgress, Alert, Button } from '@mui/material';
 import { DataGrid, type GridColDef } from '@mui/x-data-grid';
 import { useState } from 'react';
 import { AccountStatus, AccountType } from '@/types/enums';
@@ -16,11 +16,11 @@ const mockAccounts = Array.from({ length: 20 }, (_, i) => ({
   createdAt: new Date(Date.now() - i * 172800000).toISOString(),
 }));
 
-const statusColors: Record<string, 'success' | 'warning' | 'error'> = {
+const statusColors: Record<string, NonNullable<ChipProps['color']>> = {
   ACTIVE: 'success', FROZEN: 'error', PENDING_ACTIVATION: 'warning', CLOSED: 'default',
 };
 
-const typeColors: Record<string, 'primary' | 'secondary' | 'info'> = {
+const typeColors: Record<string, NonNullable<ChipProps['color']>> = {
   CHECKING: 'primary', SAVINGS: 'secondary', BUSINESS: 'info', JOINT: 'warning',
 };
 

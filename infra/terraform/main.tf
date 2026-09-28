@@ -18,21 +18,6 @@ provider "aws" {
   region = var.aws_region
 }
 
-variable "aws_region" {
-  type    = string
-  default = "us-east-1"
-}
-
-variable "environment" {
-  type    = string
-  default = "production"
-}
-
-variable "project_name" {
-  type    = string
-  default = "enterprise-banking-platform"
-}
-
 # ─── VPC Module ───
 module "vpc" {
   source = "./modules/vpc"
@@ -56,10 +41,10 @@ module "eks" {
 module "rds" {
   source = "./modules/rds"
 
-  project_name     = var.project_name
-  environment      = var.environment
-  vpc_id           = module.vpc.vpc_id
-  private_subnets  = module.vpc.private_subnet_ids
+  project_name      = var.project_name
+  environment       = var.environment
+  vpc_id            = module.vpc.vpc_id
+  private_subnets   = module.vpc.private_subnet_ids
   db_instance_class = "db.t3.medium"
   allocated_storage = 100
 }
@@ -68,10 +53,10 @@ module "rds" {
 module "redis" {
   source = "./modules/redis"
 
-  project_name  = var.project_name
-  environment   = var.environment
-  vpc_id        = module.vpc.vpc_id
-  subnet_ids    = module.vpc.private_subnet_ids
+  project_name = var.project_name
+  environment  = var.environment
+  vpc_id       = module.vpc.vpc_id
+  subnet_ids   = module.vpc.private_subnet_ids
 }
 
 # ─── MSK (Kafka) Module ───

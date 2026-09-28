@@ -42,7 +42,7 @@ export function Sidebar() {
                 }}
               >
                 <ListItemIcon sx={{ minWidth: 40 }}>{item.icon}</ListItemIcon>
-                <ListItemText primary={item.label} primaryTypographyProps={{ fontSize: 14, fontWeight: 500 }} />
+                <ListItemText primary={item.label} slotProps={{ primary: { sx: { fontSize: 14, fontWeight: 500 } } }} />
               </ListItemButton>
             </ListItem>
           ))}
@@ -57,7 +57,7 @@ export function Sidebar() {
         </Typography>
         <ListItemButton onClick={logout} sx={{ borderRadius: 2, color: 'error.main' }}>
           <ListItemIcon sx={{ minWidth: 36, color: 'error.main' }}><Logout /></ListItemIcon>
-          <ListItemText primary="Logout" primaryTypographyProps={{ fontSize: 14 }} />
+          <ListItemText primary="Logout" slotProps={{ primary: { sx: { fontSize: 14 } } }} />
         </ListItemButton>
       </Box>
     </Box>
